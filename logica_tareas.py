@@ -35,7 +35,6 @@ def marcar_completada(tareas: List[Tarea], tarea_id: int) -> bool:
     return False
 
 def listar_tareas(tareas: List[Tarea]) -> None:
-    """Muestra por pantalla todas las tareas ordenadas por fecha ascendente."""
     for t in sorted(tareas, key=lambda x: x["fecha_vencimiento"]):
         estado = "✔" if t["completada"] else "✘"
         print(f'ID: {t["id"]} | [{estado}] {t["titulo"]} | 🕒 {t["fecha_vencimiento"]} | Prioridad: {t["prioridad"]}')
