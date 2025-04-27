@@ -1,99 +1,92 @@
-Gestor de Tareas
+# Gestor de Tareas
 
 Un sistema de línea de comandos para gestionar tareas pendientes con prioridades, fechas de vencimiento y filtros inteligentes.
 
-📋 Tabla de Contenidos
+---
 
-Descripción
+## 📋 Tabla de Contenidos
 
-Características
+1. [Descripción](#descripción)
+2. [Características](#características)
+3. [Estructura del Proyecto](#estructura-del-proyecto)
+4. [Requisitos](#requisitos)
+5. [Instalación](#instalación)
+6. [Uso](#uso)
+7. [Ejemplos](#ejemplos)
 
-Estructura del Proyecto
+---
 
-Requisitos
+## 📝 Descripción
 
-Instalación
+Este proyecto implementa un gestor de tareas en Python con las siguientes funcionalidades:
 
-Uso
+- **Agregar tareas**: Título, descripción, fecha de vencimiento y prioridad.
+- **Listar tareas**: Ordenadas por fecha de vencimiento.
+- **Buscar tareas**: Por palabra clave en título o descripción.
+- **Filtrar tareas**: Por prioridad (alta, media, baja).
+- **Mostrar vencidas**: Tareas cuyo vencimiento es anterior a la fecha actual y no están completadas.
+- **Marcar completadas**: Cambia el estado de una tarea a completada.
+- **Eliminar tareas**: Por ID.
+- **Persistencia**: Guardar y cargar tareas desde un archivo CSV entre ejecuciones.
 
-Ejemplos
+---
 
+## 🚀 Características
 
-📝 Descripción
+- **Interfaz CLI**: Menú interactivo en bucle.
+- **Validaciones**: Fecha en formato `YYYY-MM-DD`, prioridad válida.
+- **CSV Persistente**: Uso de `csv.DictReader` y `csv.DictWriter`.
+- **Código modular**: Separación de responsabilidades en varios archivos.
 
-Este proyecto implementa un gestor de tareas en Python que permite:
+---
 
-Agregar tareas con título, descripción, fecha de vencimiento y prioridad.
+## 🗂️ Estructura del Proyecto
 
-Listar tareas ordenadas por fecha.
-
-Buscar y filtrar tareas por palabra clave o prioridad.
-
-Identificar tareas vencidas.
-
-Marcar tareas como completadas.
-
-Eliminar tareas por ID.
-
-Guardar y cargar tareas desde un archivo CSV para persistencia entre ejecuciones.
-
-🚀 Características
-
-Interfaz CLI: Menú interactivo en bucle hasta que el usuario decida salir.
-
-Validaciones: Formato de fecha (YYYY-MM-DD) y prioridad (alta, media, baja).
-
-Persistencia CSV: Uso de csv.DictReader/DictWriter.
-
-Código modular: Separación de lógica, persistencia y utilidades.
-
-Tests unitarios: Con pytest para funciones de lógica y persistencia.
-
-🗂️ Estructura del Proyecto
-
+```plaintext
 gestor_tareas/
 ├── data/
 │   └── tareas.csv           # Archivo CSV con las tareas (se crea automáticamente)
-├── main.py                  # Punto de entrada y menú CLI
-├── logica_tareas.py         # Funciones puras: CRUD y filtros
+├── main.py                  # Punto de entrada: menú CLI
+├── logica_tareas.py         # Funciones puras: CRUD, filtros y validaciones
 ├── persistencia.py          # Carga y guardado en CSV
-├── utils.py                 # Helpers: validaciones y utilidades
+├── utils.py                 # Utilidades: validación de fecha, prioridad, generación de ID y limpieza de pantalla
 ├── .gitignore
 └── README.md
+```
 
-⚙️ Requisitos
+---
 
-Python 3.8 o superior
+## ⚙️ Requisitos
 
-Módulos estándar: csv, datetime, os, typing
+- **Python** 3.11 o superior
+- Módulos estándar: `csv`, `datetime`, `os`, `typing`
 
-Para pruebas opcionales: pytest
+---
 
-📥 Instalación
+## 📥 Instalación
 
-Clona el repositorio:
+1. Clona el repositorio:
+   ```bash
+   git clone git@github.com:carloswm/gestor_tareas.git
+   cd gestor_tareas
+   ```
+2. Crea y activa un entorno virtual:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate    # Windows: venv\Scripts\activate
+   ```
 
-git clone git@github.com:carloswm/gestor_tareas.git
-cd gestor_tareas
+---
 
-Crea un entorno virtual y actívalo:
-
-python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
-
-Instala dependencias (solo pytest si vas a ejecutar tests):
-
-pip install pytest
-
-💻 Uso
+## 💻 Uso
 
 Ejecuta el programa principal:
 
+```bash
 python main.py
+```
 
-Sigue las opciones del menú para agregar, listar, buscar, filtrar, marcar y eliminar tareas. El archivo data/tareas.csv se crea automáticamente la primera vez.
-
-📊 Ejemplos
+Sigue las opciones del menú:
 
 1. Agregar tarea
 2. Ver todas las tareas
@@ -103,13 +96,34 @@ Sigue las opciones del menú para agregar, listar, buscar, filtrar, marcar y eli
 6. Marcar como completada
 7. Eliminar tarea
 8. Guardar y salir
-> 1
+
+El archivo `data/tareas.csv` se creará automáticamente la primera vez.
+
+---
+
+## 📊 Ejemplos
+
+```plaintext
+> 1  # Agregar tarea
 Título: Estudiar matemáticas
 Descripción: Repasar ecuaciones diferenciales
 Fecha venc. (YYYY-MM-DD): 2025-05-10
 Prioridad (alta/media/baja): alta
 Tarea creada con ID 1
 
-📄 Licencia
+> 2  # Ver tareas
+ID: 1 | [✘] Estudiar matemáticas | 🕒 2025-05-10 | Prioridad: alta
 
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+> 5  # Mostrar vencidas (suponiendo fecha > 2025-05-10)
+ID: 1 | [✘] Estudiar matemáticas | 🕒 2025-05-10 | Prioridad: alta
+
+> 6  # Marcar como completada
+ID de tarea a marcar completada: 1
+Marcada como completada.
+
+> 8  # Guardar y salir
+Guardado. ¡Hasta luego!
+```
+
+---
+
